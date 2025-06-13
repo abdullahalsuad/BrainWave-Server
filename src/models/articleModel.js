@@ -39,6 +39,11 @@ const articleSchema = new mongoose.Schema({
     trim: true,
   },
 
+  articleTags: {
+    type: [String],
+    default: [],
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,
@@ -55,8 +60,8 @@ const articleSchema = new mongoose.Schema({
       "Blockchain-Technology",
       "Augmented-Reality",
       "Robotics",
-      "Software Development",
-      "Quantum Computing",
+      "Software-Development",
+      "Quantum-Computing",
     ],
   },
 

@@ -21,7 +21,7 @@ app.use("/api/v1", articleRoutes);
 
 // Basic route
 app.get("/", (req, res) => {
-  res.json({ message: "Talent Forge Server  is running" });
+  res.json({ message: "BrainWave Server  is running" });
 });
 
 // Start server
