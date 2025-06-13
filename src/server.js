@@ -3,7 +3,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import connectDB from "./config/db.js";
+
+// routes
 import articleRoutes from "./routes/articleRoutes.js";
+import articleLikeRoutes from "./routes/articleLikeRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -18,6 +21,9 @@ connectDB();
 
 // Routes for articles
 app.use("/api/v1", articleRoutes);
+
+// Routes for articles Likes
+app.use("/api/v1", articleLikeRoutes);
 
 // Basic route
 app.get("/", (req, res) => {

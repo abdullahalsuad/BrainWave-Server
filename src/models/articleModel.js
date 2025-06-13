@@ -55,7 +55,6 @@ const articleSchema = new mongoose.Schema({
       "Artificial-Intelligence",
       "Cybersecurity",
       "Cloud-Computing",
-      "Project-Based",
       "Internet-of-Things",
       "Blockchain-Technology",
       "Augmented-Reality",
