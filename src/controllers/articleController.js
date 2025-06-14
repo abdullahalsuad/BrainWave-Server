@@ -132,6 +132,8 @@ export const commentArticle = async (req, res) => {
       createdAt: new Date(),
     });
 
+    // Update total comment count
+    article.totalArticleComment = article.articleComments.length;
     const savedArticle = await article.save();
 
     res.status(201).json(savedArticle);
