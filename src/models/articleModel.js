@@ -44,6 +44,16 @@ const articleSchema = new mongoose.Schema({
     default: [],
   },
 
+  articleLikes: {
+    type: [
+      {
+        userEmail: { type: String },
+        LikeStatus: { type: Boolean, default: false },
+      },
+    ],
+    default: [],
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,

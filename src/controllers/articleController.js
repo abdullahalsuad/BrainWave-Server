@@ -76,3 +76,37 @@ export const deleteArticle = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+// likes
+export const likeArticle = async (req, res) => {
+  const { userEmail } = req.body;
+
+  try {
+    const article = await ArticleModel.findById(req.params.id);
+
+    if (!article) {
+      return res.status(404).json({ message: "Article not found" });
+    }
+
+    // Check if the user has already liked
+    const existingIndex = article.articleLikes.findIndex(
+      (like) => like.userEmail === userEmail
+    );
+
+    if (existingIndex !== -1) {
+      // User already liked → remove the like
+      article.articleLikes.splice(existingIndex, 1);
+    } else {
+      // User has not liked yet → add new like
+      article.articleLikes.push({ userEmail, LikeStatus: true });
+    }
+
+    // Update total like count
+    article.articleLike = article.articleLikes.length;
+
+    await article.save();
+    res.status(201).json(article);
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong", error });
+  }
+};

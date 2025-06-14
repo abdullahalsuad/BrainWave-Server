@@ -21,4 +21,7 @@ router.delete("/my-articles/:id", articleController.deleteArticle);
 // Route to update
 router.put("/my-articles/:id", articleController.updateArticle);
 
+// Route to like / Dislike
+router.patch("/articles/like/:id", articleController.likeArticle);
+
 export default router;
