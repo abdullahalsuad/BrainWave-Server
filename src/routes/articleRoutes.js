@@ -12,6 +12,12 @@ router.get("/articles/:id", articleController.getArticlesById);
 // Route to create article
 router.post("/articles", articleController.addNewArticle);
 
+// Route to like / Dislike
+router.patch("/articles/like/:id", articleController.likeArticle);
+
+// Route to like / Dislike
+router.patch("/articles/comment/:id", articleController.likeArticle);
+
 // Route to get  articles by email
 router.get("/my-articles/:email", articleController.getAllArticlesByEmail);
 
@@ -20,8 +26,5 @@ router.delete("/my-articles/:id", articleController.deleteArticle);
 
 // Route to update
 router.put("/my-articles/:id", articleController.updateArticle);
-
-// Route to like / Dislike
-router.patch("/articles/like/:id", articleController.likeArticle);
 
 export default router;

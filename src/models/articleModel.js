@@ -44,21 +44,6 @@ const articleSchema = new mongoose.Schema({
     default: [],
   },
 
-  articleLikes: {
-    type: [
-      {
-        userEmail: { type: String },
-        LikeStatus: { type: Boolean, default: false },
-      },
-    ],
-    default: [],
-  },
-
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-
   articleCategory: {
     type: String,
     enum: [
@@ -74,9 +59,41 @@ const articleSchema = new mongoose.Schema({
     ],
   },
 
-  articleLike: {
+  articleLikes: {
+    type: [
+      {
+        userEmail: { type: String },
+        LikeStatus: { type: Boolean, default: false },
+      },
+    ],
+    default: [],
+  },
+
+  totalArticleLike: {
     type: Number,
     default: 0,
+  },
+
+  articleComments: {
+    type: [
+      {
+        userEmail: { type: String },
+        displayName: { type: String },
+        comment: { type: String, trim: true },
+        createdAt: { type: Date, default: Date.now },
+      },
+    ],
+    default: [],
+  },
+
+  totalArticleComment: {
+    type: Number,
+    default: 0,
+  },
+
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 

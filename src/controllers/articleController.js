@@ -102,7 +102,7 @@ export const likeArticle = async (req, res) => {
     }
 
     // Update total like count
-    article.articleLike = article.articleLikes.length;
+    article.totalArticleLike = article.articleLikes.length;
 
     await article.save();
     res.status(201).json(article);
