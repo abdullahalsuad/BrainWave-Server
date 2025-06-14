@@ -133,6 +133,7 @@ export const commentArticle = async (req, res) => {
     });
 
     const savedArticle = await article.save();
+
     res.status(201).json(savedArticle);
   } catch (err) {
     res.status(500).json({ message: err.message });
