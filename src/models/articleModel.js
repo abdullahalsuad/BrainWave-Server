@@ -41,11 +41,13 @@ const articleSchema = new mongoose.Schema({
 
   articleTags: {
     type: [String],
+    require: true,
     default: [],
   },
 
   articleCategory: {
     type: String,
+    require: true,
     enum: [
       "Artificial-Intelligence",
       "Cybersecurity",
@@ -62,8 +64,8 @@ const articleSchema = new mongoose.Schema({
   articleLikes: {
     type: [
       {
-        userEmail: { type: String },
-        LikeStatus: { type: Boolean, default: false },
+        userEmail: { type: String, require: true, trim: true },
+        LikeStatus: { type: Boolean, default: false, require: true },
       },
     ],
     default: [],
@@ -77,9 +79,10 @@ const articleSchema = new mongoose.Schema({
   articleComments: {
     type: [
       {
-        userEmail: { type: String },
-        displayName: { type: String },
-        comment: { type: String, trim: true },
+        userEmail: { type: String, require: true, trim: true },
+        userName: { type: String, require: true, trim: true },
+        userAvatar: { type: String, require: true, trim: true },
+        comment: { type: String, trim: true, require: true, trim: true },
         createdAt: { type: Date, default: Date.now },
       },
     ],

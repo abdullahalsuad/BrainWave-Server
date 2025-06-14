@@ -15,8 +15,8 @@ router.post("/articles", articleController.addNewArticle);
 // Route to like / Dislike
 router.patch("/articles/like/:id", articleController.likeArticle);
 
-// Route to like / Dislike
-router.patch("/articles/comment/:id", articleController.likeArticle);
+// Route to Comment
+router.patch("/articles/comment/:id", articleController.commentArticle);
 
 // Route to get  articles by email
 router.get("/my-articles/:email", articleController.getAllArticlesByEmail);

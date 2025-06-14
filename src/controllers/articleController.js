@@ -4,6 +4,7 @@ import ArticleModel from "../models/articleModel.js";
 export const getAllArticles = async (req, res) => {
   try {
     const articles = await ArticleModel.find();
+
     res.status(200).json(articles);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -14,7 +15,9 @@ export const getAllArticles = async (req, res) => {
 export const getArticlesById = async (req, res) => {
   try {
     const article = await ArticleModel.findById(req.params.id);
+
     if (!article) return res.status(404).json({ message: "Article not found" });
+
     res.status(200).json(article);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -26,11 +29,13 @@ export const getAllArticlesByEmail = async (req, res) => {
   try {
     const { email: creatorEmail } = req.params;
     const articles = await ArticleModel.find({ creatorEmail });
+
     if (!articles || articles.length === 0) {
       return res
         .status(404)
         .json({ message: "No articles found for this email" });
     }
+
     res.status(200).json(articles);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -41,6 +46,7 @@ export const getAllArticlesByEmail = async (req, res) => {
 export const addNewArticle = async (req, res) => {
   try {
     const article = new ArticleModel(req.body);
+
     const savedArticle = await article.save();
     res.status(201).json(savedArticle);
   } catch (err) {
@@ -57,9 +63,9 @@ export const updateArticle = async (req, res) => {
       { new: true }
     );
 
-    if (!updatedArticle) {
+    if (!updatedArticle)
       return res.status(404).json({ message: "Article not found" });
-    }
+
     res.status(201).json(updatedArticle);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -70,14 +76,16 @@ export const updateArticle = async (req, res) => {
 export const deleteArticle = async (req, res) => {
   try {
     const article = await ArticleModel.findByIdAndDelete(req.params.id);
+
     if (!article) return res.status(404).json({ message: "article not found" });
+
     res.status(200).json(article);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-// likes
+// like on a article
 export const likeArticle = async (req, res) => {
   const { userEmail } = req.body;
 
@@ -104,9 +112,29 @@ export const likeArticle = async (req, res) => {
     // Update total like count
     article.totalArticleLike = article.articleLikes.length;
 
-    await article.save();
-    res.status(201).json(article);
+    const savedArticle = await article.save();
+    res.status(201).json(savedArticle);
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong", error });
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// comment on a article
+export const commentArticle = async (req, res) => {
+  try {
+    const article = await ArticleModel.findById(req.params.id);
+
+    if (!article) return res.status(404).json({ message: "Article not found" });
+
+    // add new comment
+    article.articleComments.push({
+      ...req.body,
+      createdAt: new Date(),
+    });
+
+    const savedArticle = await article.save();
+    res.status(201).json(savedArticle);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
