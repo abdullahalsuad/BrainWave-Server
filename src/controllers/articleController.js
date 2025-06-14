@@ -141,3 +141,70 @@ export const commentArticle = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+// Single User Total comment
+export const creatorTotalComments = async (req, res) => {
+  try {
+    const { email: creatorEmail } = req.params;
+    const articles = await ArticleModel.find({ creatorEmail });
+
+    if (!articles || articles.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No articles found for this email" });
+    }
+
+    // Sum the totalArticleComment field from each article
+    const totalComments = articles.reduce((sum, article) => {
+      return sum + (article.totalArticleComment || 0);
+    }, 0);
+
+    return res.status(200).json(totalComments);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Single User Total comment
+export const creatorTotalLikes = async (req, res) => {
+  try {
+    const { email: creatorEmail } = req.params;
+    const articles = await ArticleModel.find({ creatorEmail });
+
+    if (!articles || articles.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No articles found for this email" });
+    }
+
+    // Sum the totalArticleLike field from each article
+    const totalLikes = articles.reduce((sum, article) => {
+      return sum + (article.totalArticleLike || 0);
+    }, 0);
+
+    return res.status(200).json(totalLikes);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Single User Total comment
+export const creatorTotalArticles = async (req, res) => {
+  try {
+    const { email: creatorEmail } = req.params;
+    const articles = await ArticleModel.find({ creatorEmail });
+
+    if (!articles || articles.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No articles found for this email" });
+    }
+
+    // Sum the article field from each article
+    const totalArticles = articles.length;
+
+    return res.status(200).json(totalArticles);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

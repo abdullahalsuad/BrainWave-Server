@@ -27,4 +27,22 @@ router.delete("/my-articles/:id", articleController.deleteArticle);
 // Route to update
 router.put("/my-articles/:id", articleController.updateArticle);
 
+// Route to get  total comments by email
+router.get(
+  "/my-articles/total-comments/:email",
+  articleController.creatorTotalComments
+);
+
+// Route to get  total likes by email
+router.get(
+  "/my-articles/total-likes/:email",
+  articleController.creatorTotalLikes
+);
+
+// Route to get  total likes by email
+router.get(
+  "/my-articles/total-articles/:email",
+  articleController.creatorTotalArticles
+);
+
 export default router;
