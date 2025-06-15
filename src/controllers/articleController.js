@@ -16,8 +16,6 @@ export const getArticlesById = async (req, res) => {
   try {
     const article = await ArticleModel.findById(req.params.id);
 
-    if (!article) return res.status(404).json({ message: "Article not found" });
-
     res.status(200).json(article);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -29,12 +27,6 @@ export const getAllArticlesByEmail = async (req, res) => {
   try {
     const { email: creatorEmail } = req.params;
     const articles = await ArticleModel.find({ creatorEmail });
-
-    if (!articles || articles.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "No articles found for this email" });
-    }
 
     res.status(200).json(articles);
   } catch (err) {
@@ -76,8 +68,6 @@ export const updateArticle = async (req, res) => {
 export const deleteArticle = async (req, res) => {
   try {
     const article = await ArticleModel.findByIdAndDelete(req.params.id);
-
-    if (!article) return res.status(404).json({ message: "article not found" });
 
     res.status(200).json(article);
   } catch (err) {
