@@ -3,6 +3,9 @@ import * as articleController from "../controllers/articleController.js";
 
 const router = express.Router();
 
+// Route to recent articles
+router.get("/articles/recent-articles", articleController.getRecentArticles);
+
 // Route to get all articles
 router.get("/articles", articleController.getAllArticles);
 

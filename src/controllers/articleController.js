@@ -198,3 +198,14 @@ export const creatorTotalArticles = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+// Get recent articles
+export const getRecentArticles = async (req, res) => {
+  try {
+    const result = await ArticleModel.find().sort({ createdAt: -1 }).limit(6);
+
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
