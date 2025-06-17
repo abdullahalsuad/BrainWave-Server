@@ -210,9 +210,16 @@ export const getRecentArticles = async (req, res) => {
   }
 };
 
+// Get articles by category
 export const articlesByCategory = async (req, res) => {
   try {
     const { slug: articleCategory } = req.params;
+
+    if (articleCategory === "all") {
+      const articles = await ArticleModel.find();
+      res.status(200).json(articles);
+    }
+
     const articles = await ArticleModel.find({ articleCategory });
     res.status(200).json(articles);
   } catch (err) {
