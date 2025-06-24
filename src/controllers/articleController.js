@@ -217,7 +217,8 @@ export const articlesByCategory = async (req, res) => {
 
     if (articleCategory === "all") {
       const articles = await ArticleModel.find();
-      res.status(200).json(articles);
+
+      return res.status(200).json(articles);
     }
 
     const articles = await ArticleModel.find({ articleCategory });
