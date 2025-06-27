@@ -1,5 +1,5 @@
-import fs from "fs"; // To read files
-import path from "path"; // To build file paths
+// import fs from "fs"; // To read files
+// import path from "path"; // To build file paths
 import admin from "firebase-admin";
 
 // import { fileURLToPath } from "url"; // To get current file's path
@@ -10,9 +10,10 @@ import admin from "firebase-admin";
 
 // const serviceAccountPath = path.resolve(__dirname, "serviceAccountKey.json");
 
-const fileData = Buffer.from(process.env.FIREBASE_SERVICES_KEY).toString(
-  "utf8"
-);
+const fileData = Buffer.from(
+  process.env.FIREBASE_SERVICES_KEY,
+  "base64"
+).toString("utf8");
 
 const serviceAccount = JSON.parse(fileData);
 
